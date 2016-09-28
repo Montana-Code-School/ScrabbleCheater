@@ -1,3 +1,27 @@
+.container {
+	margin:0 auto;
+	width:800px;
+}
+
+.wrapper {
+	margin:0 auto;
+
+}
+
+table {
+	padding:50px;
+}
+
+td {
+
+}
+
+tr {
+
+}
+
+
 h1 {
 	color: red;
 }
+

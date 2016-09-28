@@ -4,37 +4,53 @@
         <title>Scrabble Cheater</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="/css/main.css" />
+
     </head>
     <body>
         <div class="container">
-            <h1><%= name %></h1>
-            <ul>
-            <% authors.forEach(function(author) {%>  
-                <li><%= author %></li>
-            <%}) %>
-            </ul>
-            <div id = "scrabbleWordForm">
-                <form action="/" method="get" >
-                    <div>
-                        7 Letters: <input name="tiles" type ="text">
-                    </div>
-                    <div class="submit_button">
-                        <input type="submit" value="submit">
-                    </div>
-                </form>
-            </div>
-            <div id="output">
-
-                <h2>Your Results:</h2>
-            <ul>
-            <% wordSuggestions.forEach(function(word) {%>  
-                <li><%= word %></li>
-            <%}) %>
-            </ul>
+            <div class="wrapper">
+                <h1><%= name %></h1>
+                <ul>
+                <% authors.forEach(function(author) {%>  
+                    <li><%= author %></li>
+                <%}) %>
+                </ul>
+                <div id = "scrabbleWordForm">
+                    <form action="/" method="get" >
+                        <div>
+                            7 Letters: <input id='tiles' name="tiles" type ="text">
+                        </div>
+                        <div class="submit_button">
+                            <input id="submitButton" type="submit"  disabled="true" value="submit">
+                        </div>
+                    </form>
+                </div>
+                <div id="output">
+                    <h2>Your Results:</h2>
+                <table>
+                <% for(var i = 0; i < wordSuggestions.length; i += 4) {%>  
+                    <tr><td><%= wordSuggestions[i] %></td>
+                        <td><%= wordSuggestions[i+1] %></td>
+                        <td><%= wordSuggestions[i+2] %></td>
+                        <td><%= wordSuggestions[i+3] %></td>
+                    </tr>
+                <%} %>
+                </table>
                 
-
+                </div>
             </div>
         </div>
-      <script src="js/script.js"></script>
+      <script type='text/javascript'>
+          document.querySelector('#tiles').addEventListener('keydown', function(event){
+                console.log(event)
+                if(event.target.value.length >= 7 && !(["Backspace", "ArrowRight", "ArrowLeft", "Delete", "Enter"].includes(event.key))){
+                    event.preventDefault()
+                }
+            })
+          document.querySelector('#tiles').addEventListener('keyup', function(event){
+                console.log(event)
+                document.getElementById("submitButton").disabled = event.target.value.length !== 7;
+          })
+      </script>
     </body>
 </html>

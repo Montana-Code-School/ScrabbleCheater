@@ -24,4 +24,8 @@ app.get("/", function(req, res) {
 })
 app.use(express.static("public"))
 
+app.get("/about", function(req, res){
+	res.end('<html><head><head><body><h1>Stephanie pretty much made this entire page by herself!!!</h1></body></html>')
+})
+
 app.listen(3000)
