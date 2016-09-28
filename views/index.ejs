@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scrabble Cheater</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div class="container">
+            <h1><%= name %></h1>
+            <ul>
+            <% authors.forEach(function(author) {%>  
+                <li><%= author %></li>
+            <%}) %>
+            </ul>
+            <div id = "scrabbleWordForm">
+                <form action="/" method="get" >
+                    <div>
+                        7 Letters: <input name="tiles" type ="text">
+                    </div>
+                    <div class="submit_button">
+                        <input type="submit" value="submit">
+                    </div>
+                </form>
+            </div>
+            <div id="output">
+
+                <h2>Your Results:</h2>
+            <ul>
+            <% wordSuggestions.forEach(function(word) {%>  
+                <li><%= word %></li>
+            <%}) %>
+            </ul>
+                
+
+            </div>
+        </div>
+      <script src="js/script.js"></script>
+    </body>
+</html>

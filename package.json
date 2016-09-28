@@ -1,0 +1,23 @@
+{
+  "name": "scrabblecheater",
+  "version": "1.0.0",
+  "description": "a nifty scrabble cheating website",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Montana-Code-School/ScrabbleCheater.git"
+  },
+  "author": "montanacodeschool missoula cohort4",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Montana-Code-School/ScrabbleCheater/issues"
+  },
+  "homepage": "https://github.com/Montana-Code-School/ScrabbleCheater#readme",
+  "dependencies": {
+    "ejs": "^2.5.2",
+    "express": "^4.14.0"
+  }
+}

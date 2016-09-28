@@ -1,6 +1,6 @@
 var exec = require('child_process').exec
 
-function scrabbleCheat (tiles, callback) {
+function scrabbleCheat (tiles) {
   var correctTiles = function (tiles) {
     return function (word) {
       var charCount = tiles.split('').reduce(function (cc, char) {
@@ -28,12 +28,12 @@ function scrabbleCheat (tiles, callback) {
     }, letters)
 
   exec("grep '^" + regExp + "$' ./dict/words", function (err, stdout, stderror) {
-    var wordSuggestions = stdout.split('\n')
+    console.log(stdout.split('\n')
       .filter(function (word) {return word.length > 1})
       .filter(correctTiles(tiles))
-      .sort(function (a, b) {return b.length - a.length})
-    callback(wordSuggestions)
+      .sort(function (a, b) {return a.length - b.length})
+      .join('\n'))
   })
 }
 
-module.exports = scrabbleCheat
+scrabbleCheat(process.argv[2])
