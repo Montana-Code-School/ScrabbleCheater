@@ -11,7 +11,7 @@
             <div class="wrapper">
                 <h1><%= name %></h1>
                 <ul>
-                <% authors.forEach(function(author) {%>  
+                <% authors.forEach(function(author) {%>
                     <li><%= author %></li>
                 <%}) %>
                 </ul>
@@ -20,23 +20,18 @@
                         <div>
                             7 Letters: <input id='tiles' name="tiles" type ="text">
                         </div>
-                        <div class="submit_button">
+                        <!-- <div class="submit_button">
                             <input id="submitButton" type="submit"  disabled="true" value="submit">
-                        </div>
+                        </div> -->
                     </form>
                 </div>
                 <div id="output">
                     <h2>Your Results:</h2>
-                <table>
-                <% for(var i = 0; i < wordSuggestions.length; i += 4) {%>  
-                    <tr><td><%= wordSuggestions[i] %></td>
-                        <td><%= wordSuggestions[i+1] %></td>
-                        <td><%= wordSuggestions[i+2] %></td>
-                        <td><%= wordSuggestions[i+3] %></td>
-                    </tr>
-                <%} %>
+                <table id="suggestionTable">
+
                 </table>
-                
+                <div id="demo">
+                </div>
                 </div>
             </div>
         </div>
@@ -50,6 +45,25 @@
           document.querySelector('#tiles').addEventListener('keyup', function(event){
                 console.log(event)
                 document.getElementById("submitButton").disabled = event.target.value.length !== 7;
+          })
+
+          function layoutTable(prev,curr,index){
+              var a = "<a href='http://www.urbandictionary.com/define.php?term=" + curr + "'>";
+              var openTableRow = index % 4 === 0 ? "<tr>" : "";
+              var closeTableRow = index % 4 === 3 ? "</tr>": ""
+              var td = curr.length === 7 ? "<td class='bingo'>" : "<td>"
+              return prev.concat(openTableRow,td, a, curr, "</a></td>",closeTableRow);
+          }
+          document.getElementById("tiles").addEventListener('keyup', function(event){
+                var xhttp = new XMLHttpRequest();
+                  xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                      var ourText = JSON.parse(this.responseText).reduce(layoutTable, "<table>") + "</table>";
+                      document.getElementById("demo").innerHTML = ourText;
+                    }
+                  };
+                  xhttp.open("GET", "/api/suggestions?tiles=" + document.getElementById('tiles').value, true);
+                  xhttp.send();
           })
       </script>
     </body>
